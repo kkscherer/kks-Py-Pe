@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/326/trunk/src/echonest/support/midi
+END
+EventDispatcher.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/EventDispatcher.py
+END
+MidiToText.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/MidiToText.py
+END
+example_transpose_octave.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/example_transpose_octave.py
+END
+example_print_events.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/example_print_events.py
+END
+RawInstreamFile.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/RawInstreamFile.py
+END
+RawOutstreamFile.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/RawOutstreamFile.py
+END
+changes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/changes.txt
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/__init__.py
+END
+MidiFileParser.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/MidiFileParser.py
+END
+example_print_file.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/example_print_file.py
+END
+MidiInFile.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/MidiInFile.py
+END
+MidiOutFile.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/MidiOutFile.py
+END
+constants.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/constants.py
+END
+version.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/version.txt
+END
+example_print_channel_0.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/example_print_channel_0.py
+END
+example_mimimal_type0.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/example_mimimal_type0.py
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/readme.txt
+END
+MidiInStream.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/MidiInStream.py
+END
+DataTypeConverters.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/DataTypeConverters.py
+END
+MidiOutStream.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/MidiOutStream.py
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/experimental
+END
+MidiOutStreamBase.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/experimental/MidiOutStreamBase.py
+END
+MidiOutPassThrough.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/experimental/MidiOutPassThrough.py
+END
+EventDispatcherBase.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/experimental/EventDispatcherBase.py
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/326/trunk/src/echonest/support/midi/experimental/readme.txt
+END
