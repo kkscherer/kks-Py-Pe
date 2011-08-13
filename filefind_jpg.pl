@@ -1,9 +1,13 @@
-    use File::Find;
+# Use this script to go thru a directory (and subdirs) of pictures and
+# create a set of directories named yyyy-mm-dd with shortcuts to the image
+# files that where _taken_ on this date.
+#
+    use File::Find;	# needed to find files in dir tree
 
-    use Win32::OLE;
+    use Win32::OLE;	# needed to create MS shortcuts
     my $wsh = new Win32::OLE 'WScript.Shell';
 
-    use Image::ExifTool;
+    use Image::ExifTool;	# gets info out of jpg image files
     my $exifTool = new Image::ExifTool;
     $exifTool->Options(Unknown => 1);
 
@@ -18,12 +22,13 @@
 
     exit; 
 
+# this is where each found file is checked
     sub wanted {
     my $file = $_;
     my $shcut;
     my $target = "$File::Find::name";
     $target =~ s/\//\\/g;
-    print TXT "$File::Find::name"; 
+    print TXT "\n$File::Find::name"; 
     if (/\.jpg$/i) {
        my $info = $exifTool->ImageInfo($file);
        my $tag = 'CreateDate';
