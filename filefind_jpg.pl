@@ -59,7 +59,7 @@
            my $comment = time;
            $shcut->{'Description'} = $comment if defined $comment;
            $shcut->Save;
-	   print TXT "\n     - $datedir/$val/$file.lnk";
+	   print TXT "\n   - $datedir/$val/$file.lnk";
 #	printf ("%-32s : %s\n", $val, $file);
       }
       print TXT "\n";
