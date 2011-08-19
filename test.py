@@ -58,7 +58,7 @@ for root, dirs, files in os.walk(dirs_to_search):
                 shortcut.WorkingDirectory = root
                 shortcut.save()
             #print "\t", date_taken
-            print
+            #print
 
     print root, "number of jpg files = ", jpg, " others = ", non_jpg
 
