@@ -1,0 +1,46 @@
+import os
+from os.path import join, getsize
+import re
+
+print "start"
+for root, dirs, files in os.walk('C:\Users\scherer\Desktop\Karl\Taipaw'):
+    print sum(getsize(join(root, name)) for name in files),
+    print "bytes in\t", len(files), " files \t",
+    print root
+    jpg = 0
+    non_jpg = 0
+    for name in files:
+        if re.search('\.jpg', name, re.I) == None:
+#            print name
+            non_jpg = non_jpg + 1                   
+        else:
+            jpg = jpg + 1
+            print name
+    print "number of jpg files = ", jpg, " others = ", non_jpg
+    if 'By Date' in dirs:
+        dirs.remove('By Date')  # don't visit CVS directories
+    if 'Non JPG' in dirs:
+        dirs.remove('Non JPG')  # don't visit CVS directories
+    if 'By Type' in dirs:
+        dirs.remove('By Type')  # don't visit CVS directories
+
+from win32com.client import Dispatch
+ 
+def createShortcut(path, target='', wDir='', icon=''):
+    ext = path[-3:]
+    if ext == 'url':
+        shortcut = file(path, 'w')
+        shortcut.write('[InternetShortcut]\n')
+        shortcut.write('URL=%s' % target)
+        shortcut.close()
+    else:
+        shell = Dispatch('WScript.Shell')
+        shortcut = shell.CreateShortCut(path)
+        shortcut.Targetpath = target
+        shortcut.WorkingDirectory = wDir
+        if icon == '':
+            pass
+        else:
+            shortcut.IconLocation = icon
+        shortcut.save()
+
