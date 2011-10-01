@@ -2,17 +2,22 @@ from win32com.client import Dispatch
 import os
 from os.path import join, getsize
 import re
-import pyexiv2
 
 shell = Dispatch('WScript.Shell')
 
 # exif stuff goes here
 
+import pyexiv2
+
+# testing only - needs work
+
 date_dir = 'C:\Users\scherer\Desktop\Karl\pydate'
 dirs_to_search = 'C:\Users\scherer\Desktop\Karl\Taipaw'
 
+# this loops thru all files in root and subdirs
+
 for root, dirs, files in os.walk(dirs_to_search):
-#    print sum(getsize(join(root, name)) for name in files),
+#    print sum(getsize(join(root, name)) for name in files),  
 #    print "bytes in\t", len(files), " files \t",
 #    print root
     if 'By Date' in dirs:
@@ -21,7 +26,7 @@ for root, dirs, files in os.walk(dirs_to_search):
         dirs.remove('Non JPG')  # don't visit Non JPG directories
     if 'By Type' in dirs:
         dirs.remove('By Type')  # don't visit By Type directories
-    jpg = 0
+    jpg = 0                     # keep track of number of image (and other) files
     non_jpg = 0
     for name in files:
         if re.search('\.jpg', name, re.I) == None:
