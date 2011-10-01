@@ -8,6 +8,9 @@ shell = Dispatch('WScript.Shell')
 
 # exif stuff goes here
 
+cwd = os.getcwd()
+cwd_files = join(cwd, "files")
+print cwd, cwd_files
 date_dir = 'C:\Users\scherer\Desktop\Karl\copy'
 dirs_to_search = 'C:\Users\scherer\Desktop\Karl\copy'
 
