@@ -1,0 +1,15 @@
+application: guest-kks
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /images
+  static_dir: images
+
+- url: /images/(.*)
+  static_files: images/\1
+  upload: images/(.*)
+
+- url: /.*
+  script: guestbook.py
