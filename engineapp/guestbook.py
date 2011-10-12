@@ -30,7 +30,7 @@ class Greeting(db.Model):
 
 class MainPage(webapp.RequestHandler):
   def get(self):
-    self.response.out.write('<html><body><p>Hello<p>')
+    self.response.out.write('<html><head><title>Karl\'s Guestbook</title></head>\n<body><p>Hello<p>')
     self.response.out.write('<div><img src="images/fft_test.png" width="500" height="100" alt="Logo" /></div>')
     greetings = db.GqlQuery("SELECT * "
                             "FROM Greeting "
