@@ -11,22 +11,34 @@ url = 'http://ichart.finance.yahoo.com/table.csv' # Yahoo Finance Hist Stock dat
 
 # get Stock symbol from cmd line or interactive input
 if len(sys.argv) < 2:
-	s = raw_input('Stock:')
+	ssym = raw_input('Stock:')
 else:
-        s = sys.argv[1]
-s =  str.upper(s)
+        ssym = sys.argv[1]
+ssym =  str.upper(ssym)
 # see if we should be verbose
 if len(sys.argv) > 2 and sys.argv[2] == '-v':
 	q = False
 else:
 	q = True
 #
-# TODO
 # need to adjust dates here (params a b c and d e f)
-#
+# 
+days = 130 
+bday = days*168/96 # course business day calculation
+import datetime
+t1 = datetime.date.today()
+td = datetime.timedelta(days=bday)
+t2 = t1 - td
 
 # set up CGI string
-data = urllib.urlencode(mkdict(s=s, a=8, b=17, c=2011, d=9, e=10, f=2011, g='d', ignore='.csv'))
+data = urllib.urlencode(mkdict(s=ssym,
+                               a=t2.month,
+                               b=t2.day,
+                               c=t2.year,
+                               d=t1.month,
+                               e=t1.day,
+                               f=t1.year,
+                               g='d', ignore='.csv'))
 if not q :
 	print data
 # ask Yahoo for data
@@ -53,10 +65,11 @@ spamReader = csv.reader(str.splitlines(html), delimiter=',')
 
 for row in spamReader:
     if row[-1] == 'Adj Close' :   # add stock symbol to first line, nice touch
-	    row[-1] = row[-1] + " " +s
+	    row[-1] = row[-1] + " " +ssym
     if not q :
             print "\t".join(row)
     spamWriter.writerow(row)
-
+if not q :
+    print spamReader.line_num
 f.close()
 # we're done
