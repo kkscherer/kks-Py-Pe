@@ -48,7 +48,7 @@ try:
 	response = urllib2.urlopen(req)
 	html = response.read()
 except :
-	print "Couldn't get data for " + s
+	print "Couldn't get data for " + ssym
 	sys.exit(2)
 
 # debug only
@@ -60,12 +60,12 @@ except :
 import csv
 
 f=open('C:\Users\scherer\Desktop\imagetools\stocks.csv', 'wb')
-spamWriter = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+spamWriter = csv.writer(f, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 spamReader = csv.reader(str.splitlines(html), delimiter=',')
 
 for row in spamReader:
     if row[-1] == 'Adj Close' :   # add stock symbol to first line, nice touch
-	    row[-1] = row[-1] + " " +ssym
+	    row[-1] = row[-1] + " " + ssym
     if not q :
             print "\t".join(row)
     spamWriter.writerow(row)
