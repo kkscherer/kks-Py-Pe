@@ -12,39 +12,46 @@
     my $dvd =  $ARGV[0] ? $ARGV[0] :1;
 
     my @datedir = "C:/Users/scherer/Desktop/Karl/By Date";
-    my @dvddir  = ('/Users/scherer/Desktop/Karl/DVD1');
+    my $dvddir  = "C:/Users/scherer/Desktop/Karl/DVD$dvd";
     our $total = 0;
-    our $base =  4600000000*($dvd-1) - 500000000;
-    our $limit = 4600000000*$dvd;
+    our $base =  4600000000*($dvd-1); # not sure why -> - 500000000;
+    our $limit = $base + 4600000000;
+    our $limit = $base + 14600000;
+
     open( TXT, ">exiftools.log" );
+
+    mkdir "$dvddir" unless stat("$dvddir");
+    print TXT "--> $dvddir\n";
 
     find( { wanted => \&wanted }, @datedir );
 
     close TXT;
+
 
     exit;
 
     sub wanted {
         my $file   = $_;
         my $source = "$File::Find::dir";
-        print TXT "$source/$file";
+        print TXT "$source/$file\n";
         if ( $file =~ /\.lnk$/i && $file =~ /\.jpg/i ) {
             my $shcut = $wsh->CreateShortcut($_) or die;
 	    my $target =  $shcut->TargetPath;
 	    $target =~ s/\\/\//g;
-            print TXT " - $target";
-            my $destdir = $source;
-            $destdir =~ s/By Date/DVD1/;
+            my $st = stat( $target ) or next;
+            print TXT " >- $target\n";
+# TODO           
+	    my $destdir = $source;
+            $destdir =~ s/.*By Date/$dvddir/;
             my $dest = $destdir . "/" . $file;
 	    $dest =~ s/\.lnk$//i;
-            print TXT "\n", $target, " -> $dest";
-            my $st = stat( $target ) or next;
+# TODO /
             my $size = $st->size;
             $total += $size;
 	    if ($total < $base ) { next }
             mkdir "$destdir" unless stat("$destdir");
 	    my $cpst = copy("$target", "$dest");
-            print TXT " $size,$total - $cpst";
+	    print TXT  " -> $dest -- $size,$total, ($cpst)";
 	    if ($total > $limit) { exit }
         }
         print TXT "\n";
