@@ -14,17 +14,22 @@ import os
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-	    response_body = ['%s: %s' % (key, value)
-                    for key, value in sorted(os.environ.items())]
-	    response_body = '<br/>'.join(response_body)
+      response_body = ['%s: %s' % (key, value)
+	 for key, value in sorted(os.environ.items())]
+      response_body = '</br>'.join(response_body)
+      response_body = response_body + '<br/>The End<br/>'
+# added
 
-	    response_body = response_body + '<br/>The End<br/>'
+#      self.response.status = 205
+      self.response.headers['Content-Type'] = 'text/html'
+      self.response.headers['Content-Length'] = str(len(response_body))
 
-	    self.response.out.write(response_body)
+      self.response.out.write(response_body)
 
+# added end
 
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
+    application = webapp.WSGIApplication([('/.*', MainHandler)],
                                          debug=True)
     util.run_wsgi_app(application)
 
