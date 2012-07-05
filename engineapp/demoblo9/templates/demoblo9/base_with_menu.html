@@ -1,0 +1,108 @@
+﻿{%extends "base.html"%}
+
+{%block stylesheets%}{%endblock%}
+{%block additionalstylesheets%}
+<style type="text/css">
+#maincontent {
+	left: 264px;
+}
+#menu {
+    left: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    width: 256px;
+}
+#menucontent {
+	width: 244px;
+	padding: 6px 6px 8px 6px;
+	line-height: 3.1ex;
+}
+#menucontent a.tag,
+#menucontent a.tag:visited {
+    line-height: 2.6ex;
+	text-transform: uppercase;
+	letter-spacing: 0.2ex;
+	font-family: sans-serif;
+	font-weight: bold;
+	background-color: #FF8700;
+	color: #FFF;
+	padding: 2px 4px 3px 4px;
+	text-decoration: none;
+	margin-left: -6px;
+	border-left: 4px solid #FF4100;
+}
+#menucontent a.tag:hover {
+	background-color: #FF4100;
+}
+#menucontent a.highlighted,
+#menucontent a.highlighted:visited {
+    background-color: #0772A1;
+    border-left: 4px solid #024A68;
+}
+#menucontent a.highlighted:hover {
+    background-color: #024A68;
+}
+#toolbar {
+    top: 0;
+    background-color: transparent;
+    padding: 6px 6px 6px 6px;
+    margin: 0;
+}
+#toolbar a,
+#toolbar a:visited {
+    font-family: sans-serif;
+    font-size: smaller;
+    color: #FF8700;
+    text-decoration: none;
+}
+#toolbar a:hover {
+    color: #FFB100;
+}
+#toolbar h1 {
+    margin: 0 0 2ex 0;
+    cursor: pointer;
+}
+#admintools {
+    margin-top: 5ex;
+    font-size: smaller;
+    font-family: sans-serif;
+    line-height: 120%;
+}
+</style>
+{%endblock%}
+{%block javascripts%}{%endblock%}
+{%block menucontent%}
+<div id="menu">
+<div id="toolbar">
+<h1 title="Zur Startseite" onclick="window.location='/'">demoblo9</h1>
+{%block toolbar%}{%endblock%}
+</div>
+<div id="menucontent">
+{% if tags %}
+   {% for tag in tags|dictsortreversed:"count" %}
+   <a class="tag{% ifequal tag.tag selectedtag %} highlighted{% endifequal %}" title="{{ tag.count|add:"1" }}×{{ tag.tag }}" href="/?tag={{ tag.tag }}" style="font-size: {{ tag.size }}">{{ tag.tag }}</a><br/>
+   {% endfor %}
+{% endif %}
+<div id="admintools">
+{% if permissions.can_post %}
+   <a href="/edit/">Neuer Beitrag</a>
+   <br>
+{% endif %}
+{% if authinfo.admin %}
+   <a href="/export">Export</a>
+   <br>
+   <a href="/import">Import</a>
+   <br>
+   <a href="/manage/files">Dateien&nbsp;verwalten</a>
+   <br>
+   <a href="/manage/blog">Blog&nbsp;verwalten</a>
+   <br>
+   <a href="/upload/">Upload</a>
+   </div>
+{% endif %}
+<div style="margin-top:11ex"><a href="http://code.google.com/intl/de-DE/appengine/docs/whatisgoogleappengine.html" target="_blank"><img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" title="Powered by Google App Engine" border="0"></a></div>
+</div><!-- /#menucontent -->
+</div><!-- /#menu -->
+{%endblock%}
+{%block content%}{%endblock%}

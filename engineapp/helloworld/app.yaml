@@ -1,0 +1,11 @@
+application: helloworld-kks
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /plain
+  script: helloworld_plain.py
+- url: /.*
+  script: helloworld.py
+

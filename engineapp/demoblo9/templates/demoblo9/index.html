@@ -1,0 +1,182 @@
+﻿{%extends "base_with_menu.html"%}
+
+{%block javascripts%}
+<script charset="utf-8" type="text/javascript" src="/js/cms.js"></script>
+<script charset="utf-8" type="text/javascript" src="/js/twitter.js"></script>
+{%endblock%}
+
+{%block stylesheets%}
+<style type="text/css">
+#blog {
+}
+#blog p {
+   margin: 1ex 0 1ex 0;
+}
+#blog .post {
+   margin: 0 0 6ex 0;
+}
+#blog .datetime {
+   font-family: sans-serif;
+   font-style: italic;
+   font-size: smaller;
+}
+#blog .tags {
+   padding: 2ex 0 0.5ex 0;
+   font-family: sans-serif;
+   font-size: smaller;
+}
+#blog .author {
+   font-family: sans-serif;
+   font-style: normal;
+   font-size: smaller;
+   font-weight: bold;
+}
+#blog .editbar {
+   font-family: sans-serif;
+   font-size: smaller;
+   vertical-align: middle;
+}
+#blog .editbar a {
+   text-decoration: none;
+   font-weight: normal;
+   color: #024A68;
+   margin-right: 1.5em;
+}
+#blog .editbar a:hover {
+   text-decoration: underline;
+}
+#blog .editbar a:visited {
+   color: #024A68;
+}
+#blog .heading {
+   font-weight: bold;
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   font-family: sans-serif;
+   font-size: 180%;
+   color: #0772A1;
+   line-height: 100%;
+   padding: 0.5ex 0 0.5ex 0;
+}
+#blog .heading a {
+   color: #0772A1;
+   text-decoration: none;
+}
+#blog .heading a:hover {
+   color: #0772A1;
+   text-decoration: none;
+}
+#blog .heading visited {
+   color: #0772A1;
+}
+#blog a.tag,
+#blog a.tag:visited {
+   padding: 0.5ex 0.6em 0.6ex 0.5em;
+   margin-right: 0.5em;
+   color: white;
+   background-color: #BF9430;
+   font-weight: bold;
+   text-decoration: none;
+}
+#blog a.tag:hover {
+	background-color: #A67300;
+}
+</style>
+{%endblock%}
+
+{%block toolbar%}
+{% if user %}
+<table border="0">
+<tr height="32">
+  <td><img src="/img/twitter-logo-mini{% if not twitter %}-inactive{% endif %}.png" width="24" height="24" title="Twitter"/></td>
+  <td>
+{% if not twitter %}
+  <a colspan="2" href="/twitter/login" title="bei Twitter anmelden">Anmelden</a></td>
+{% else %}
+  <a href="/twitter/logout" title="{{ twitter.username }} von Twitter abmelden" >Abmelden</a>
+  </td><td>
+  <a href="http://twitter.com/{{ twitter.username }}" target="_blank"><img title="{{ twitter.username }} ({{ twitter.name }})" src="{{ twitter.picture }}" width="32" height="32" border="0"/></a>
+{% endif %}
+  </td>
+</tr>
+<tr height="32">
+  <td><img src="/img/myspace-logo-mini{% if not myspace %}-inactive{% endif %}.png" width="24" height="24" title="MySpace"/></td>
+  <td>
+{% if not myspace %}
+  <a colspan="2" href="/myspace/login" title="bei MySpace anmelden">Anmelden</a></td>
+{% else %}
+  <a href="/myspace/logout" title="{{ myspace.username }} von MySpace abmelden" >Abmelden</a>
+  </td><td>
+  <a href="http://myspace.de/{{ myspace.username }}" target="_blank"><img title="{{ myspace.username }} ({{ myspace.name }})" src="{{ myspace.picture }}" width="32" height="32" border="0"/></a>
+{% endif %}
+  </td>
+</tr>
+<tr height="32">
+  <td><img src="/img/yahoo-logo-mini{% if not yahoo %}-inactive{% endif %}.png" width="24" height="24" title="Yahoo!"/></td>
+  <td>
+{% if not yahoo %}
+  <a colspan="2" href="/yahoo/login" title="bei Yahoo! anmelden">Anmelden</a></td>
+{% else %}
+  <a href="/yahoo/logout" title="{{ yahoo.username }} von Yahoo! abmelden" >Abmelden</a>
+  </td><td>
+  <a href="http://yahoo.com/{{ yahoo.username }}" target="_blank"><img title="{{ yahoo.username }} ({{ yahoo.name }})" src="{{ yahoo.picture }}" width="32" height="32" border="0"/></a>
+{% endif %}
+  </td>
+</tr>
+</table>
+{% endif %}
+{%endblock%}
+{%block content%}
+<div id="blog">
+{% for entry in entries %}
+  <div class="post" id="entry_{{ entry.key }}">
+  <p class="editbar">
+    {% if user %}
+      <a href="/edit/{{ entry.key }}">Editieren</a>
+      <a href="#" onclick="confirm_delete_post('{{ entry.key }}')">Löschen</a>
+      {% if twitter %}
+        <span id="post_twitter_{{ entry.key }}">
+        {% if entry.posted_to_twitter %}
+          <a href="#" onclick="repostToTwitter('{{ entry.key }}'); return false" title="Erneut an {{ twitter.username }} twittern"><img src="/img/twitter-logo-mini.png" border="0" width="16" height="16" title="RT @{{ twitter.username }}"/></a>
+        {% else %}
+          <a href="#" onclick="postToTwitter('{{ entry.key }}'); return false" title="'An {{ twitter.username }} twittern"><img src="/img/twitter-logo-mini.png" border="0" width="16" height="16" title="Twittern @{{ twitter.username }}"/></a>
+        {% endif %}
+        </span>
+      {% endif %}
+      {% if yahoo %}
+        <span id="post_yahoo_{{ entry.key }}">
+        {% if entry.posted_to_yahoo %}
+          <a href="#" onclick="repostToYahoo('{{ entry.key }}'); return false" title="Erneut an {{ yahoo.username }} bei Yahoo! posten"><img src="/img/yahoo-logo-mini.png" border="0" width="16" height="16" title="RT @{{ yahoo.username }}"/></a>
+        {% else %}
+          <a href="#" onclick="postToYahoo('{{ entry.key }}'); return false" title="An {{ yahoo.username }} bei Yahoo! posten"><img src="/img/yahoo-logo-mini.png" border="0" width="16" height="16" title="Yahoo! @{{ yahoo.username }}"/></a>
+        {% endif %}
+        </span>
+      {% endif %}
+      {% if myspace %}
+        <span id="post_myspace_{{ entry.key }}">
+        {% if entry.posted_to_myspace %}
+          <a href="#" onclick="repostToMyspace('{{ entry.key }}'); return false" title="Erneut an {{ myspace.username }} bei Myspace posten"><img src="/img/myspace-logo-mini.png" border="0" width="16" height="16" title="RT @{{ myspace.username }}"/></a>
+        {% else %}
+          <a href="#" onclick="postToMyspace('{{ entry.key }}'); return false" title="'An {{ myspace.username }} bei Myspace posten"><img src="/img/myspace-logo-mini.png" border="0" width="16" height="16" title="Posten @{{ yahoo.username }} bei Myspace"/></a>
+        {% endif %}
+        </span>
+      {% endif %}
+    {% endif %}
+    <a class="permalink" href="{{ entry.permalink }}">Permalink</a>
+  </p>
+  <p class="heading"><a href="/show/{{ entry.key }}">{{ entry.title|escape }}</a></p>
+  <div>
+   {% if entry.intro %}{{ entry.intro }}{% else %}{{ entry.content|truncatewords_html:100 }}{% endif %}
+   <a href="/show/{{ entry.key }}">[mehr]</a>
+  </div>
+  {% if entry.tags %}
+  <div class="tags">Schlag{{ entry.tags|length|pluralize:"wort,wörter" }}: {% for tag in entry.tags %}<a href="/?tag={{ tag }}" class="tag">{{ tag }}</a>{% endfor %}</div>
+  {% endif %}
+  <span class="datetime">{{ entry.created }}</span>
+  {% if entry.author %} &minus; <span class="author">{{ entry.author_nickname }}</span>{% endif %}
+  </div><!-- /#post -->
+{% endfor %}
+</div><!-- /#blog -->
+{% if hasPrev %}<button class="shortbutton" title="zu Eintrag {{ prevOffset }}" onclick="window.location='/?offset={{ prevOffset }}'">&lt;-</button>{% endif %}
+{% if hasNext %}<button class="shortbutton" title="zu Eintrag {{ nextOffset }}" onclick="window.location='/?offset={{ nextOffset }}'">-&gt;</button>{% endif %}
+{%endblock%}

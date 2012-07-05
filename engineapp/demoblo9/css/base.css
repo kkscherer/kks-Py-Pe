@@ -1,0 +1,220 @@
+﻿@charset "utf-8";
+
+/* http://colorschemedesigner.com/#0C61Pw0w0w0w0 */
+
+* {
+	margin: 0;
+}
+	
+body {
+	font-family: Georgia, serif;
+    font-size: 13px;
+    background: #fff;
+    color: #000;
+    line-height: 122%;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 2ex 0 1ex 0;
+    color: #225E79;
+    line-height: normal;
+}
+
+td, th {
+	vertical-align: top;
+}
+
+th {
+	text-align: left;
+}
+
+ul, ol {
+	margin: 0.8ex 0 2.2ex 0;
+}
+
+li {
+    line-height: 140%;
+    margin: 0.4ex 0 0.6ex 0;
+}
+
+p {
+	line-height: 140%;
+	margin: 0.8ex 0 1.2ex 0;
+}
+
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+a {
+    font-weight: bold;
+	color: #A62A00;
+	text-decoration: none;
+}
+
+a:visited {
+    color: #BF5530;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.permalink {
+	font-size: smaller;
+    font-family: sans-serif;
+}
+
+.minilink {
+    font-size: smaller;
+    font-family: sans-serif;
+}
+
+blockquote {
+	font-family: Georgia, serif;
+	font-style: italic;
+	padding-left: 2em;
+	margin-right: 3em;
+	border-left: 1px dotted #333;
+}
+
+#headline {
+	font-family: sans-serif;
+	font-size: smaller;
+    margin: 0 0 6ex 0;
+    padding: 0;
+}
+
+#maincontent {
+    top: 0;
+    left: 222px;
+    position: absolute;
+	background-color: transparent;
+	padding: 1ex 1em 1ex 1em;
+	width: 100%;
+}
+
+.bigbutton {
+	background-image: url(/img/button_big.png);
+	width: 103px;
+	height: 29px;
+	text-align: center;
+	border: medium none;
+	color: #fff;
+	line-height: 10px;
+	font-size: 11px;
+	font-weight: bold;
+	font-family: Verdana, sans-serif;
+	cursor: pointer;
+	margin: 4px 4px 4px 4px;
+}
+
+.shortbutton {
+	background-image: url(/img/button_short.png);
+	width: 31px;
+	height: 19px;
+	text-align: center;
+	border: medium none;
+	color: #fff;
+	line-height: 10px;
+	font-size: 11px;
+	font-weight: bold;
+	font-family: Verdana, sans-serif;
+	cursor: pointer;
+    margin: 2px 2px 2px 2px;
+}
+
+#message {
+    background-color: rgba(255,255,255,0.95);
+    position: absolute;
+    top: -200px;
+    left: 0;
+    display: none;
+    width: 80%;
+    height: 60px;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(0,0,0,0.7);
+    border-left: 2px solid rgba(0,0,0,0.7);
+    border-right: 2px solid rgba(0,0,0,0.7);
+    z-index: 101;
+    color: black;
+    overflow: hidden;
+}
+
+#errors {
+    background-color: rgba(255,33,33,0.9);
+    position: absolute;
+    top: -200px;
+    left: 0;
+    display: none;
+    width: 80%;
+    height: 60px;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(128,0,0,0.8);
+    border-left: 2px solid rgba(128,0,0,0.8);
+    border-right: 2px solid rgba(128,0,0,0.8);
+    z-index: 100;
+    overflow: hidden;
+}
+
+#errors ul li {
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
+table.diagram th {
+    text-align: center;
+}
+
+table.diagram .row1 {
+    background-color: #ccc;
+}
+
+table.diagram caption {
+    background-color: #393;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding: 0.7ex 0.5em 1.6ex 0.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid black;
+}
+
+.accomplished {
+    background-color: #8EEB84;
+}
+
+.nearlyaccomplished {
+    background-color: #E7FFA7;
+}
+
+.undone {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.intro {
+	font-weight: bold;
+}
+
+.datetime {
+	font-style: italic;
+}
+
+.author {
+    font-style: italic;
+    font-weight: bold;
+}

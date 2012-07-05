@@ -1,0 +1,132 @@
+﻿{%extends "base_without_menu.html"%}
+
+{%block javascripts%}
+<script type="text/javascript" src="/js/closure.js"></script>
+<script charset="utf-8" type="text/javascript" src="/js/cms.js"></script>
+<script charset="utf-8" type="text/javascript" src="/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+tinyMCE.init({
+  theme: "advanced",
+  theme_advanced_toolbar_location: "top",
+  theme_advanced_toolbar_align: "left",
+  theme_advanced_buttons1: "bold,italic,underline,strikethrough,separator,justifyleft,justifycenter,justifyright,justifyfull,formatselect,bullist,numlist,outdent,indent,link,unlink,anchor,image,separator,undo,redo,cleanup,code,separator,sub,sup,charmap",
+  theme_advanced_buttons2: "",
+  theme_advanced_buttons3: "",
+  mode: "exact",
+  elements: "content",
+  onchange_callback : "postHasChangedHandler"
+});
+
+function toggleEditor(id) {
+    var e = document.getElementById('modeswitcher');
+    if (!tinyMCE.get(id)) {
+        tinyMCE.execCommand('mceAddControl', false, id);
+        e.innerHTML = 'HTML';
+    }
+    else {
+        tinyMCE.execCommand('mceRemoveControl', false, id);
+        e.innerHTML = 'Rich Text';
+    }
+}
+</script>
+{%endblock%}
+
+{%block stylesheets%}
+<style type="text/css">
+.label {
+  margin: 2ex 0 0 0;
+  font-weight: bold;
+  color: #225E79;
+}
+input.header {
+  font-size: large;
+  color: #225E79;
+}
+/* Styles for goog.ui.AutoComplete */
+.ac-renderer {
+  position: absolute;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #666;
+  -moz-box-shadow: 2px 2px 2px rgba(102, 102, 102, .4);
+  -webkit-box-shadow: 2px 2px 2px rgba(102, 102, 102, .4);
+}
+.ac-row {
+  position: relative;
+  padding: .4em;
+  cursor: pointer;
+}
+.ac-highlighted {
+  font-weight: bold;
+}
+.ac-active {
+  background-color: #b2b4bf;
+}
+#intro {
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #225E79;
+}
+</style>
+{%endblock stylesheets%}
+
+{%block content%}
+{% if errors %}
+<p class="errors">
+{% for error in errors %}
+    {{ error }}
+{% endfor %}
+</p>
+{% endif %}
+<div style="float:right"><button class="bigbutton" onclick="confirm_exit('/')">zum Blog</button></div>
+<form method="post" action="/edit/{% if entry.is_saved %}{{ entry.key }}{% endif %}" style="width:100%" accept-charset="UTF-8">
+  <p class="label">Titel</p>
+  <input class="header" type="text" name="title" style="width:100%" value="{{ entry.title }}" onchange="postHasChanged=true; return false"></input>
+  <p class="label">Einleitung (optional)</p>
+  <textarea id="intro" name="intro" style="width:100%; height:3em">{{ entry.intro|escape }}</textarea>
+  <p class="label">Inhalt</p>
+  <p style="float:right; font-size:smaller">[<a id="modeswitcher" href="javascript:toggleEditor('content');">HTML</a>]</p>
+  <textarea id="content" name="content" style="width:100%; height:30em">{{ entry.content|escape }}</textarea>
+  <p class="label">Schlagworte</p>
+  <input type="text" id="tagEditor" name="tags" style="width:100%" value="{{ entry.tagList|join:", " }}" onchange="postHasChanged=true; return false"></input>
+  {% if entry.is_saved %}
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><span class="label">Erstellt</span></td><td><span class="label">Zuletzt geändert</span></td>
+    </tr>
+    <tr>
+      <td><input type="text" name="created" value="{{ entry.created }}" size="30"/></td><td><input type="text" name="changed" value="{{ entry.changed }}" size="30"/></td>
+    </tr>
+  </table>
+  {% endif %}
+  <p class="label">
+    Öffentlich&nbsp;<input type="checkbox" name="published" value="yes"{% if entry.published %} checked{% endif %} style="margin-right: 2em"/>
+    In Timeline zeigen&nbsp;<input type="checkbox" name="publish_in_timeline" value="yes"{% if entry.publish_in_timeline %} checked{% endif %} style="margin-right: 2em"/>
+    {% if twitter or myspace or yahoo %}
+      <span style="margin-right: 1em">Posten an:</span>
+      {% if twitter %}<img src="/img/twitter-logo-mini.png" border="0" width="16" height="16" title="Twitter"/>&nbsp;<input type="checkbox" name="autopost_twitter" value="yes"{% if not entry.posted_to_twitter %} checked{% endif %} style="margin-right: 2em"/>{% endif %}
+      {% if myspace %}<img src="/img/myspace-logo-mini.png" border="0" width="16" height="16" title="Myspace"/>&nbsp;<input type="checkbox" name="autopost_myspace" value="yes"{% if not entry.posted_to_myspace %} checked{% endif %} style="margin-right: 2em"/>{% endif %}
+      {% if yahoo %}<img src="/img/yahoo-logo-mini.png" border="0" width="16" height="16" title="Yahoo"/>&nbsp;<input type="checkbox" name="autopost_yahoo" value="yes"{% if not entry.posted_to_yahoo %} checked{% endif %} style="margin-right: 2em"/>{% endif %}
+    {% endif %}
+  </p>
+  <br/>
+  <input class="bigbutton" type="submit" value="Speichern"></input>
+  {% if entry.is_saved %}
+  <button class="bigbutton" style="float:right" onclick="preview('{{ entry.key }}'); return false">Vorschau</button>
+  <button class="bigbutton" style="float:right" onclick="confirm_delete_post('{{ entry.key }}'); return false">L&ouml;schen</button>
+  {% endif %}
+</form>
+{% if entry.is_saved %}
+<p style="font-style:italic; font-size:smaller">{{ entry.created }} ({{ entry.author_email }}) pID=<a href="/-{{ entry.permalink }}">{{ entry.permalink }}</a></p>
+{% endif %}
+
+<script type="text/javascript">
+var tagList = [ {% for tag in tags %}'{{ tag.tag }}', {% endfor %} ];
+var ted = document.getElementById('tagEditor');
+if (ted)
+	var ac = new goog.ui.AutoComplete.Basic(tagList, ted, true);
+
+goog.events.listen(window, 'unload', function() { goog.events.removeAll(); }); 
+</script>
+{%endblock%}

@@ -1,0 +1,12 @@
+﻿{%extends "base_with_menu.html"%}
+
+{%block content%}
+<h1>Datei hochladen{% if blob.key %} und ersetzen{% endif %}</h1>
+<form method="post" action="{{ upload_url }}" enctype="multipart/form-data">
+  {% if blob.key %}<a target="_blank" href="/get/{{ blob.key }}">{{ blob.filename }}</a> ersetzen durch{% endif %}
+  <br>
+  <input type="file" name="file" />
+  <br>
+  <input type="submit" value="Hochladen" />
+</form>
+{%endblock%}

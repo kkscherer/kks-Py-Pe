@@ -10,11 +10,6 @@
 #
 import os
 import sys
-sys.path.insert(0,['C:\\Program Files\\Google\\google_appengine', 'C:\\Program Files\\Google\\google_appengine\\lib\\antlr3', 'C:\\Program Files\\Google\\google_appengine\\lib\\django_0_96', 'C:\\Program Files\\Google\\google_appengine\\lib\\fancy_urllib', 'C:\\Program Files\\Google\\google_appengine\\lib\\ipaddr', 'C:\\Program Files\\Google\\google_appengine\\lib\\protorpc', 'C:\\Program Files\\Google\\google_appengine\\lib\\webob', 'C:\\Program Files\\Google\\google_appengine\\lib\\whoosh', 'C:\\Program Files\\Google\\google_appengine\\lib\\yaml\\lib', 'C:\\Program Files\\Google\\google_appengine\\lib\\simplejson', 'C:\\Program Files\\Google\\google_appengine\\lib\\google.appengine._internal.graphy'])
-
-print sys.path
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import util
 
 class MainHandler(webapp.RequestHandler):
     def get(self):

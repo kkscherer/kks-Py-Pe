@@ -8,13 +8,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import os
-import sys
-sys.path.insert(0,['C:\\Program Files\\Google\\google_appengine', 'C:\\Program Files\\Google\\google_appengine\\lib\\antlr3', 'C:\\Program Files\\Google\\google_appengine\\lib\\django_0_96', 'C:\\Program Files\\Google\\google_appengine\\lib\\fancy_urllib', 'C:\\Program Files\\Google\\google_appengine\\lib\\ipaddr', 'C:\\Program Files\\Google\\google_appengine\\lib\\protorpc', 'C:\\Program Files\\Google\\google_appengine\\lib\\webob', 'C:\\Program Files\\Google\\google_appengine\\lib\\whoosh', 'C:\\Program Files\\Google\\google_appengine\\lib\\yaml\\lib', 'C:\\Program Files\\Google\\google_appengine\\lib\\simplejson', 'C:\\Program Files\\Google\\google_appengine\\lib\\google.appengine._internal.graphy'])
-
-print sys.path
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
+import os
+import sys
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
@@ -23,8 +20,6 @@ class MainHandler(webapp.RequestHandler):
       response_body = '</br>'.join(response_body)
       response_body = response_body + '<br/>The End<br/>'
       response_body = response_body + '</br>'.join(sys.path)
-      sys.path.append('C:\\Windows\\system32\\python27.zip', 'C:\\Python27\\DLLs', 'C:\\Python27\\lib', 'C:\\Python27\\lib\\plat-win', 'C:\\Python27\\lib\\lib-tk', 'C:\\Python27', 'C:\\Users\\scherer\\AppData\\Roaming\\Python\\Python27\\site-packages', 'C:\\Python27\\lib\\site-packages', 'C:\\Python27\\lib\\site-packages\\win32', 'C:\\Python27\\lib\\site-packages\\win32\\lib', 'C:\\Python27\\lib\\site-packages\\Pythonwin', 'C:\\Python27\\lib\\site-packages\\setuptools-0.6c11-py2.7.egg-info')
-
 # added
       try:
          import scipy

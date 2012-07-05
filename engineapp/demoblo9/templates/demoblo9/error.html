@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript">
+function submiterror() {
+    var f = document.getElementById('err');
+    if (f)
+        f.submit();
+    else
+        window.location="/?error={{ errmsg }}";  
+}
+</script>
+</head>
+<body onload="submiterror()">
+<form id="err" action="/" method="post">
+<input type="hidden" name="error" value="{{ errmsg }}"/>
+</form>
+</body>
+</html>

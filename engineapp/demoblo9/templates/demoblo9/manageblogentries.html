@@ -1,0 +1,70 @@
+﻿{%extends "base_with_menu.html"%}
+
+{%block javascripts%}
+<script charset="utf-8" type="text/javascript" src="/js/cms.js"></script>
+<script charset="utf-8" type="text/javascript" src="/js/twitter.js"></script>
+{%endblock%}
+
+{%block stylesheets%}
+{%endblock%}
+
+{%block content%}
+<table width="100%">
+<thead>
+<tr>
+  <th style="border-bottom: 0.5ex solid #225E79">&nbsp;</th>
+  <th style="border-bottom: 0.5ex solid #225E79">Titel</th>
+  <th style="border-bottom: 0.5ex solid #225E79">Erstellungsdatum<br>letzte Änderung</th>
+  <th style="border-bottom: 0.5ex solid #225E79">Autor</th>
+</tr>
+</thead>
+<tbody>
+{% for entry in entries %}
+<tr>
+  <td style="border-bottom: 1px dashed #225E79">
+   <a class="minilink" href="/edit/{{ entry.key }}">Editieren</a>
+   <br>
+   <a class="minilink" href="#" onclick="confirm_delete_post('{{ entry.key }}')">Löschen</a>
+   <br>
+   {% if twitter %}
+     <span id="post_twitter_{{ entry.key }}">
+     {% if entry.posted_to_twitter %}
+       <a href="#" onclick="repostToTwitter('{{ entry.key }}'); return false" title="Erneut an {{ twitter.username }} twittern"><img src="/img/twitter-logo-mini.png" border="0" width="16" height="16" title="RT @{{ twitter.username }}"/></a>
+     {% else %}
+       <a href="#" onclick="postToTwitter('{{ entry.key }}'); return false" title="'An {{ twitter.username }} twittern"><img src="/img/twitter-logo-mini.png" border="0" width="16" height="16" title="Twittern @{{ twitter.username }}"/></a>
+     {% endif %}
+     </span>
+   {% endif %}
+   {% if yahoo %}
+     <span id="post_yahoo_{{ entry.key }}">
+     {% if entry.posted_to_yahoo %}
+       <a href="#" onclick="repostToYahoo('{{ entry.key }}'); return false" title="Erneut an {{ yahoo.username }} bei Yahoo! posten"><img src="/img/yahoo-logo-mini.png" border="0" width="16" height="16" title="RT @{{ yahoo.username }}"/></a>
+     {% else %}
+       <a href="#" onclick="postToYahoo('{{ entry.key }}'); return false" title="An {{ yahoo.username }} bei Yahoo! posten"><img src="/img/yahoo-logo-mini.png" border="0" width="16" height="16" title="Yahoo! @{{ yahoo.username }}"/></a>
+     {% endif %}
+     </span>
+   {% endif %}
+   {% if myspace %}
+     <span id="post_myspace_{{ entry.key }}">
+     {% if entry.posted_to_myspace %}
+       <a href="#" onclick="repostToMyspace('{{ entry.key }}'); return false" title="Erneut an {{ myspace.username }} bei Myspace posten"><img src="/img/myspace-logo-mini.png" border="0" width="16" height="16" title="RT @{{ myspace.username }}"/></a>
+     {% else %}
+       <a href="#" onclick="postToMyspace('{{ entry.key }}'); return false" title="'An {{ myspace.username }} bei Myspace posten"><img src="/img/myspace-logo-mini.png" border="0" width="16" height="16" title="Posten @{{ yahoo.username }} bei Myspace"/></a>
+     {% endif %}
+     </span>
+   {% endif %}
+  </td>
+  <td style="border-bottom: 1px dashed #225E79">
+    <a href="/-{{ entry.permalink }}">{{ entry.title|escape }}</a>
+    <div class="minilink" style="margin-top: 2ex">{{ entry.permalink }}</div>
+  </td>
+  <td style="border-bottom: 1px dashed #225E79">{{ entry.created }}{% ifnotequal entry.created entry.changed %}<br>{{ entry.changed }}{% endifnotequal %}</td>
+  <td style="border-bottom: 1px dashed #225E79">{{ entry.author_nickname }}</td>
+</tr>
+{% endfor %}
+</tbody>
+<tfoot></tfoot>
+</table>
+{% if hasPrev %}<button class="shortbutton" title="zu Eintrag {{ prevOffset }}" onclick="window.location='/manage/blog?offset={{ prevOffset }}'">&lt;-</button>{% endif %}
+{% if hasNext %}<button class="shortbutton" title="zu Eintrag {{ nextOffset }}" onclick="window.location='/manage/blog?offset={{ nextOffset }}'">-&gt;</button>{% endif %}
+{%endblock%}

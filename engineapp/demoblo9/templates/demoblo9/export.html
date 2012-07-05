@@ -1,0 +1,17 @@
+﻿{%extends "base_without_menu.html"%}
+
+{%block content%}
+<h1>Daten in Datei exportieren</h1>
+<form method="post" action="/export">
+  Was: <select name="what">
+    <option value="blog" selected>Blog</option>
+    <option value="permissions">Berechtigungen</option>
+  </select>
+  Format: <select name="format">
+    <option value="json" selected>JSON</option>
+    <option value="pickle">Pickle</option>
+  </select>
+  <input type="checkbox" value="on" name="compress" />&nbsp;bzip2-komprimiert
+  <input type="submit" value="Exportieren" />
+</form>
+{%endblock%}

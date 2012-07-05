@@ -1,0 +1,22 @@
+﻿{%extends "base.html"%}
+
+{%block content%}
+<h1>{{ entry.title }}</h1>
+{% if entry.intro %}
+<p class="intro">{{ entry.intro }}</p>
+{% endif %}
+{{ entry.content }}
+<p class="datetime">{{ entry.created }}</p>
+{% if entry.author %}
+<p class="author">{{ entry.author }} </p>
+{% endif %}
+<p><a class="permalink" href="{{ entry.permalink }}">Permalink</a></p>
+{%endblock%}
+
+{%block stylesheets%}
+<style type="text/css">
+#maincontent {
+	left: 0;
+}
+</style>
+{%endblock%}

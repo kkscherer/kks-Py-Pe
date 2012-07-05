@@ -1,0 +1,18 @@
+﻿{%extends "base_without_menu.html"%}
+
+{%block content%}
+<h1>Daten aus Datei importieren</h1>
+<form method="post" action="/import" enctype="multipart/form-data">
+  <input type="file" name="file" /><br />
+  Wohin: <select name="what">
+    <option value="blog" selected>Blog</option>
+    <option value="permissions">Berechtigungen</option>
+  </select>
+  Format: <select name="format">
+    <option value="json" selected>JSON</option>
+    <option value="pickle">Pickle</option>
+  </select>
+  <input type="checkbox" value="on" name="compress" />&nbsp;bzip2-komprimiert
+  <input type="submit" value="Hochladen" />
+</form>
+{%endblock%}

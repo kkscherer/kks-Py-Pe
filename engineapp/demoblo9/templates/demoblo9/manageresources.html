@@ -1,0 +1,38 @@
+﻿{%extends "base_with_menu.html"%}
+
+{%block javascripts%}
+<script charset="utf-8" type="text/javascript" src="/js/cms.js"></script>
+{%endblock%}
+
+{%block stylesheets%}
+{%endblock%}
+
+{%block content%}
+<table width="100%">
+<thead>
+<tr>
+  <th style="border-bottom: 0.5ex solid #225E79">&nbsp;</th>
+  <th style="border-bottom: 0.5ex solid #225E79">Dateiname</th>
+  <th style="border-bottom: 0.5ex solid #225E79">Größe</th>
+  <th style="border-bottom: 0.5ex solid #225E79">Erstellungsdatum</th>
+</tr>
+</thead>
+<tbody>
+{% for entry in entries %}
+<tr>
+  <td style="border-bottom: 1px dashed #225E79">
+   <a class="minilink" href="/upload/{{ entry.key }}">Bearbeiten</a>
+   <br>
+   <a class="minilink" href="#" onclick="confirm_delete_resource('{{ entry.key }}')">Löschen</a>
+  </td>
+  <td style="border-bottom: 1px dashed #225E79"><a target="_blank" href="/get/{{ entry.key }}">{{ entry.filename }}</a></td>
+  <td style="border-bottom: 1px dashed #225E79">{{ entry.size|filesizeformat }}</td>
+  <td style="border-bottom: 1px dashed #225E79">{{ entry.created }}</td>
+</tr>
+{% endfor %}
+</tbody>
+<tfoot></tfoot>
+</table>
+{% if hasPrev %}<button class="shortbutton" title="zu Eintrag {{ prevOffset }}" onclick="window.location='/manage/files?offset={{ prevOffset }}'">&lt;-</button>{% endif %}
+{% if hasNext %}<button class="shortbutton" title="zu Eintrag {{ nextOffset }}" onclick="window.location='/manage/files?offset={{ nextOffset }}'">-&gt;</button>{% endif %}
+{%endblock%}
