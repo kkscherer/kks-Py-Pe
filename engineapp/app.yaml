@@ -1,9 +1,12 @@
 application: guest-kks
-version: 1
+version: 4
 runtime: python
 api_version: 1
 
 handlers:
+- url: /favicon\.ico
+  static_files: images/favicon.ico
+
 - url: /images
   static_dir: images
 
@@ -13,3 +16,4 @@ handlers:
 
 - url: /.*
   script: guestbook.py
+
