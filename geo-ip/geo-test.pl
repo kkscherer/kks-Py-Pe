@@ -1,6 +1,6 @@
   use Geo::IP;
 
-  my $name = "kks.homedns.org";
+  my $name = "kks.ddns.net";
   
   my $gi = Geo::IP->new(GEOIP_STANDARD);
   # look up IP address '24.24.24.24'
